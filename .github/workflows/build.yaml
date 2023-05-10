@@ -3,6 +3,7 @@ name: Build Web App
 
 on:
     pull_request:
+    push:
         branches:
             - main
 
@@ -15,6 +16,6 @@ jobs:
 
         - name: Docker Build
           run: docker build -t app ./src
-          
+
 
 
