@@ -5,6 +5,9 @@
 trigger:
 - main
 
+pool:
+  name: InternalPool
+
 resources:
 - repo: self
 
@@ -18,8 +21,8 @@ variables:
   tag: '$(Build.BuildId)'
 
 
-  # Agent VM image name
-  vmImageName: 'InternalPool'
+  # # Agent VM image name
+  # vmImageName: 'InternalPool'
 
   # Name of the new namespace being created to deploy the PR changes.
   k8sNamespaceForPR: 'review-app-$(System.PullRequest.PullRequestId)'
