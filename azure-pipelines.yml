@@ -12,7 +12,7 @@ variables:
 
   # Container registry service connection established during pipeline creation
   dockerRegistryServiceConnection: 'SC-T01'
-  imageRepository: 'chetanvcodeapp'
+  imageRepository: 'app'
   containerRegistry: 'registry01xtr.azurecr.io'
   dockerfilePath: '**/Dockerfile'
   tag: '$(Build.BuildId)'
