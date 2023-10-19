@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: chetanvcodeapp 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: chetanvcodeapp
+  template:
+    metadata:
+      labels:
+        app: chetanvcodeapp 
+    spec:
+      containers:
+        - name: chetanvcodeapp 
+          image: registryxzds.azurecr.io/chetanvcodeapp
+          ports:
+          - containerPort: 80
