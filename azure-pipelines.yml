@@ -11,15 +11,15 @@ resources:
 variables:
 
   # Container registry service connection established during pipeline creation
-  dockerRegistryServiceConnection: '230c2abc-ad5a-4233-b9f8-31e42c99ac8d'
+  dockerRegistryServiceConnection: 'SC-T01'
   imageRepository: 'chetanvcodeapp'
-  containerRegistry: 'registryxzds.azurecr.io'
+  containerRegistry: 'registry01xtr.azurecr.io'
   dockerfilePath: '**/Dockerfile'
   tag: '$(Build.BuildId)'
-  imagePullSecret: 'registryxzds433d-auth'
+
 
   # Agent VM image name
-  vmImageName: 'ubuntu-latest'
+  vmImageName: 'InternalPool'
 
   # Name of the new namespace being created to deploy the PR changes.
   k8sNamespaceForPR: 'review-app-$(System.PullRequest.PullRequestId)'
@@ -62,21 +62,12 @@ stages:
         deploy:
           steps:
           - task: KubernetesManifest@0
-            displayName: Create imagePullSecret
-            inputs:
-              action: createSecret
-              secretName: $(imagePullSecret)
-              dockerRegistryEndpoint: $(dockerRegistryServiceConnection)
-
-          - task: KubernetesManifest@0
             displayName: Deploy to Kubernetes cluster
             inputs:
               action: deploy
               manifests: |
                 $(Pipeline.Workspace)/manifests/deployment.yml
                 $(Pipeline.Workspace)/manifests/service.yml
-              imagePullSecrets: |
-                $(imagePullSecret)
               containers: |
                 $(containerRegistry)/$(imageRepository):$(tag)
 
