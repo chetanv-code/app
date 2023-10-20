@@ -40,6 +40,38 @@ steps:
 
   - upload: manifests
     artifact: manifests
+  
+  - task: KubernetesManifest@1
+    inputs:
+      action: 'deploy'
+      connectionType: 'azureResourceManager'
+      azureSubscriptionConnection: 'SC-T01'
+      azureResourceGroup: 'RG-DevOps'
+      kubernetesCluster: 'aks-app-01'
+      namespace: 'default'
+      manifests: |
+            $(Pipeline.Workspace)/manifests/deployment.yml               
+            $(Pipeline.Workspace)/manifests/service.yml
+      containers: $(containerRegistry)/$(imageRepository):$(tag)
+  
+  # - task: KubernetesManifest@
+  #         displayName: Create imagePullSecret
+  #         inputs:
+  #           action: createSecret
+  #           secretName: $(imagePullSecret)
+  #           dockerRegistryEndpoint: $(dockerRegistryServiceConnection)
+
+  #       - task: KubernetesManifest@0
+  #         displayName: Deploy to Kubernetes cluster
+  #         inputs:
+  #           action: deploy
+  #           manifests: |
+  #             $(Pipeline.Workspace)/manifests/deployment.yml
+  #             $(Pipeline.Workspace)/manifests/service.yml
+  #           imagePullSecrets: |
+  #             $(imagePullSecret)
+  #           containers: |
+  #             $(containerRegistry)/$(imageRepository):$(tag)
 
 # - stage: Deploy
 #   displayName: Deploy stage
