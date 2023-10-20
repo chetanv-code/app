@@ -16,7 +16,7 @@ pool:
 variables:
 
   # Container registry service connection established during pipeline creation
-  dockerRegistryServiceConnection: '1c5e25ad-3aa3-47cd-857c-17e6d3c7a396'
+  dockerRegistryServiceConnection: 'ContainerRegistry'
   imageRepository: 'chetanvcodeapp'
   containerRegistry: 'registryxzds.azurecr.io'
   dockerfilePath: '**/Dockerfile'
