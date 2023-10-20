@@ -23,8 +23,8 @@ variables:
   tag: '$(Build.BuildId)'
   imagePullSecret: 'registryxzds1938d937-auth'
 
-  # Agent VM image name
-  vmImageName: 'ubuntu-latest'
+  # # Agent VM image name
+  # vmImageName: 'ubuntu-latest'
 
 
 stages:
