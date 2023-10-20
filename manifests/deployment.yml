@@ -1,19 +1,19 @@
 apiVersion : apps/v1
 kind: Deployment
 metadata:
-  name: chetanvcodeapp 
+  name: app01 
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: chetanvcodeapp
+      app: app01
   template:
     metadata:
       labels:
-        app: chetanvcodeapp 
+        app: app01 
     spec:
       containers:
-        - name: chetanvcodeapp 
-          image: registryxzds.azurecr.io/chetanvcodeapp
+        - name: app01 
+          image: registry01xtr.azurecr.io/app:#BUILDID#
           ports:
           - containerPort: 80
