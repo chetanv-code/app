@@ -50,8 +50,8 @@ steps:
       kubernetesCluster: 'aks-app-01'
       namespace: 'default'
       manifests: |
-            $(Pipeline.Workspace)/manifests/deployment.yml               
-            $(Pipeline.Workspace)/manifests/service.yml
+            **/manifests/deployment.yml               
+            **/manifests/service.yml
       containers: $(containerRegistry)/$(imageRepository):$(tag)
   
   # - task: KubernetesManifest@
