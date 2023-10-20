@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
         - name: app01 
-          image: registry01xtr.azurecr.io/app:#BUILDID#
+          image: registry01xtr.azurecr.io/app:40
           ports:
           - containerPort: 80
