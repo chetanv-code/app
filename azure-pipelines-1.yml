@@ -9,7 +9,7 @@ resources:
 - repo: self
 
 pool:
-  name: InternalPol
+  name: InternalPool
   demands:
    - agent.name -equals ag01
 
