@@ -9,9 +9,9 @@ resources:
 - repo: self
 
 pool:
-  name: InternalPool
-  demands:
-   - agent.name -equals ag01
+  name: vmsspool # InternalPool
+  # demands:
+  #  - agent.name -equals ag01
 
 variables:
 
