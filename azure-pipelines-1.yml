@@ -28,22 +28,22 @@ variables:
   - name: dockerRegistryServiceConnection
       value:'ContainerRegistry'
   - name: imageRepository
-      value: 'app'
+      value:'app'
   - name: containerRegistry
-      value: 'registry01xtr.azurecr.io'
+      value:'registry01xtr.azurecr.io'
   - name: dockerfilePath
-      value: '**/Dockerfile'
+      value:'**/Dockerfile'
   - name: tag
-      value: '$(Build.BuildId)'
+      value:'$(Build.BuildId)'
   - name: imagePullSecret
-      value: 'registryxzds1938d937-auth'
+      value:'registryxzds1938d937-auth'
   - name: teamName
     ${{ if eq( parameters['environment'], 'developer') }}:
-      value: "alpha"
+      value:"alpha"
     ${{ if eq( parameters['environment'], 'preproduction' ) }}:
-      value: "beta"
+      value:"beta"
     ${{ if notIn( parameters['environment'], 'developer', 'preproduction') }}:
-      value: "charlie"
+      value:"charlie"
 
 
 
