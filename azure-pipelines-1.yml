@@ -13,15 +13,42 @@ pool:
   # demands:
   #  - agent.name -equals ag01
 
+  # demands:
+parameters:
+  - name: environment
+    displayName: Which Team to deploy?
+    type: string
+    default: 'developer'
+    values:
+    - developer
+    - preproduction
+    - production
+ 
 variables:
+  - name: dockerRegistryServiceConnection
+      value:'ContainerRegistry'
+  - name: imageRepository
+      value: 'app'
+  - name: containerRegistry
+      value: 'registry01xtr.azurecr.io'
+  - name: dockerfilePath
+      value: '**/Dockerfile'
+  - name: tag
+      value: '$(Build.BuildId)'
+  - name: imagePullSecret
+      value: 'registryxzds1938d937-auth'
+  - name: teamName
+    ${{ if eq( parameters['environment'], 'developer') }}:
+      value: "alpha"
+    ${{ if eq( parameters['environment'], 'preproduction' ) }}:
+      value: "beta"
+    ${{ if notIn( parameters['environment'], 'developer', 'preproduction') }}:
+      value: "charlie"
+
+
 
   # Container registry service connection established during pipeline creation
-  dockerRegistryServiceConnection: 'ContainerRegistry'
-  imageRepository: 'app'
-  containerRegistry: 'registry01xtr.azurecr.io'
-  dockerfilePath: '**/Dockerfile'
-  tag: '$(Build.BuildId)'
-  imagePullSecret: 'registryxzds1938d937-auth'
+
 
   # # Agent VM image name
   # vmImageName: 'ubuntu-latest'
