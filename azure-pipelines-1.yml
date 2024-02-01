@@ -2,6 +2,24 @@
 # Build and push image to Azure Container Registry; Deploy to Azure Kubernetes Service
 # https://docs.microsoft.com/azure/devops/pipelines/languages/docker
 
+resources:
+  webhooks:
+    - webhook: StartPipeline          ### Webhook alias
+      connection: deploy_service_webhook    ### Incoming webhook service connection
+      # filters:
+      #   - path: repositoryName      ### JSON path in the payload
+      #     value: maven-releases     ### Expected value in the path provided
+      #   - path: action
+      #     value: CREATED
+steps:
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    ### JSON payload data is available in the form of ${{ parameters.<WebhookAlias>.<JSONPath>}}
+    script: |
+      Write-Host ${{ parameters.MyWebhookTrigger.repositoryName}}
+      Write-Host ${{ parameters.MyWebhookTrigger.component.group}}
+
 trigger:
 - main
 
